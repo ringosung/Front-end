@@ -66,6 +66,7 @@ class APIFeatures {
 
         return this;
     }
+}
 exports.getAllTours = async (req, res) => {
 
     try{
