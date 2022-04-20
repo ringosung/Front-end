@@ -41,6 +41,9 @@ const sendErrorProd = (err, res) => {
         })
     }
 };
+
+const handleJWTError = () => new AppError('Invalid JWT. Please try again', 401)
+const handleJWTExpiredError = () =>  new AppError('Your token has expired! Please log in again.', 401);
 module.exports = (err, req, res, next) => {
     
     err.statusCode = err.statusCode || 500;
@@ -49,10 +52,13 @@ module.exports = (err, req, res, next) => {
     if(process.env.NODE_ENV === 'development'){
         sendErrorDev(err, res)
     } else if (process.env.NODE_ENV === 'production'){
-        let error = {...err};
+        let error = Object.create(err);;
         
-        if(error.name === 'Casterror') error = handleCasterrorDB(error)
-        if(error.code === 11000) error = handleDuplicateFieldsDB(error)
+        if(error.name === 'Casterror') error = handleCasterrorDB(error);
+        if(error.code === 11000) error = handleDuplicateFieldsDB(error);
+        if(error.name === 'ValidationError') error = handleValidationErrorDB(error);
+        if(error.name === 'JsonWebTokenError') error = handleJWTError();
+        if (error.name === 'TokenExpiredError') error = handleJWTExpiredError();
 
        sendErrorProd(error, res)
     }
