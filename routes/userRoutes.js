@@ -1,11 +1,14 @@
 const express = require('express')
 const userController = require('./../controllers/userController')
-const authrController = require('./../controllers/authController')
+const authController = require('./../controllers/authController')
 
 const router = express.Router();
 
-router.post('/signup', authrController.signup)
-router.post('/login', authrController.login)
+router.post('/signup', authController.signup)
+router.post('/login', authController.login)
+
+router.post('/forgotPassword', authController.forgotPassword)
+router.patch('/resetPassword/:token', authController.resetPassword)
 
 router
     .route('/')
