@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const {promisify} = require('util');
 const jwt = require('jsonwebtoken');
 const User = require('./../models/userModel');
@@ -104,8 +105,8 @@ exports.forgotPassword = catchAsync(async(req, res, next) => {
     }
     
     // 2) create a reset token 
-    const resetToken = user.createPasswordResetToken;
-    await user.save({ validateBeforeSave:false });
+    const resetToken = user.createPasswordResetToken();
+    await user.save({ validateBeforeSave: false });
 
     // 3) send the reset token to the user's email address
     const resetURL = `${req.protocol}://${req.get('host')}/api/v1/users/resetPassword/${resetToken}`
@@ -136,6 +137,48 @@ exports.forgotPassword = catchAsync(async(req, res, next) => {
    
 });
 
-exports.resetPassword = (req, res, next) => {
+exports.resetPassword = catchAsync(async(req, res, next) => {
+    // 1) get user based on password reset token
+
+    const hashedToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
+
+    const user = await User.findOne({passwordResetToken: hashedToken, passwordResetExpires: {$gt: Date.now()}})
+
+    // 2) If the token is valid, set new password
+    if (!user){
+        return next(new AppError('Token is invalid or expired', 400))
+    }
+    user.password = req.body.password;
+    user.passwordConfirmation = req.body.passwordConfirmation;
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+    await user.save();
+
+
+    // 3) Update changedPasswordAt in user database
+
+
+    // 4) send JWT and login the user
+    const token = signToken(user._id);
+    res.status(200).json({
+        status: 'success',
+        token
+    })
+
+})
+
+exports.updatePassword = catchAsync(async(req, res, next) => {
+    // 1) get user from database
+    const user = await User.findOne(req.user.id).select('+password');
+
+    // 2) check if user's input password is correct
+    if(!(await user.correctPassword(req.body.passwordCurrent, user.password)))
+        return next(new AppError('Your current password is incorrect'), 401);
+    // 3) update the password 
+
+    user.password = req.body.password;
+    user.passwordConfirmation = req.body.passwordConfirmation;
+    await user.save();
     
-}
+    // 4) send JWT and login the user
+})
