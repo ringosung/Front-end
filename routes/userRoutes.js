@@ -10,10 +10,18 @@ router.post('/login', authController.login)
 
 router.post('/forgotPassword', authController.forgotPassword)
 router.patch('/resetPassword/:token', authController.resetPassword)
+
+// all routes below this middleware have to login
+router.use(authController.protect);
+
 router.patch('/updateMyPassword', authController.protect, authController.updatePassword)
 
-router.patch('/updateMe', authController.protect, userController.updateMe)
-router.delete('/deleteMe', authController.protect, userController.deleteMe)
+router.get('/me', userController.getMe, userController.getUser)
+router.patch('/updateMe', userController.updateMe)
+router.delete('/deleteMe', userController.deleteMe)
+
+// all routes below this middleware have to be logged in as admin
+router.use(authController.restrictTo('admin'))
 
 router
     .route('/')
