@@ -1,21 +1,27 @@
 /* eslint-disable*/
 import '@babel/polyfill'
 import { displayMap } from './mapbox';
-import { login } from './login'
+import { login, logout } from './login'
 
 // DOM element
-const mapbox = document.getElementById('map');
+const mapBox = document.getElementById('map');
+const loginForm = document.querySelector('.form');
+const logOutBtn = document.querySelector('.nav__el--logout');
 
 
 // Delegation
-const locations = JSON.parse(document.getElementById('map').dataset.locations);
+if (mapBox) {
+    const locations = JSON.parse(mapBox.dataset.locations);
+    displayMap(locations);
+  }
 
-displayMap(locations);
 
-document.querySelector('.form').addEventListener('submit', e => {
+if (loginForm) 
+loginForm.addEventListener('submit', e => {
     e.preventDefault();
     const email= document.getElementById('email').value;
     const password = document.getElementById('password').value;
     login(email, password);
 });
 
+if (logOutBtn) logOutBtn.addEventListener('click', logout)

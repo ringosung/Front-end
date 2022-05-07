@@ -1,8 +1,8 @@
-/* eslint-disable*/
-
-export const displayMap = (locations) => {
-    mapboxgl.accessToken = 'pk.eyJ1IjoicmluZ29zdW5nIiwiYSI6ImNsMnV1bDEyNTA1cWwza3F0aHBiNXUxOHcifQ.OXQERgSrPqWB91MOZcqFhg';
-const map = new mapboxgl.Map({
+/* eslint-disable */
+export const displayMap = locations => {
+    mapboxgl.accessToken =
+    'pk.eyJ1IjoicmluZ29zdW5nIiwiYSI6ImNsMnV1bDEyNTA1cWwza3F0aHBiNXUxOHcifQ.OXQERgSrPqWB91MOZcqFhg';
+    var map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/ringosung/cl2uwyhwj00p014ks76zxx290', // style URL
     scrollZoom: false
