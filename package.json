@@ -6,13 +6,18 @@
   "scripts": {
     "start": "nodemon server.js",
     "start:prod": "cross-env NODE_ENV=production nodemon server.js",
-    "debug": "ndb server.js"
+    "debug": "ndb server.js",
+    "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js",
+    "build:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js"
   },
   "author": "Ringo Sung",
   "license": "ISC",
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
     "ant": "^0.2.0",
+    "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
@@ -26,6 +31,7 @@
     "morgan": "^1.10.0",
     "node": "^17.7.2",
     "nodemailer": "^4.7.0",
+    "parcel-bundler": "^1.12.5",
     "pug": "^3.0.2",
     "slugify": "^1.6.5",
     "validator": "^13.7.0",

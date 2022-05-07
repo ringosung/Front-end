@@ -31,7 +31,16 @@ const catchAsync = require('./../utils/catchAsync')
 })
 
 exports.getLoginForm = (req, res) => {
-    res.status(200).render('login', {
-        title: 'Log into your account'
-    })
+    // res.status(200).render('login', {
+    //     title: 'Log into your account'
+    // })
+    res
+    .status(200)
+    .set(
+        'Content-Security-Policy',
+        "connect-src 'self' https://cdnjs.cloudflare.com"
+    )
+    .render('login', {
+        title: 'Log into your account',
+    });
 }

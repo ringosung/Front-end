@@ -1,9 +1,7 @@
 /* eslint-disable*/
 
-const locations = JSON.parse(document.getElementById('map').dataset.locations);
-console.log(locations);
-
-mapboxgl.accessToken = 'pk.eyJ1IjoicmluZ29zdW5nIiwiYSI6ImNsMnV1bDEyNTA1cWwza3F0aHBiNXUxOHcifQ.OXQERgSrPqWB91MOZcqFhg';
+export const displayMap = (locations) => {
+    mapboxgl.accessToken = 'pk.eyJ1IjoicmluZ29zdW5nIiwiYSI6ImNsMnV1bDEyNTA1cWwza3F0aHBiNXUxOHcifQ.OXQERgSrPqWB91MOZcqFhg';
 const map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/ringosung/cl2uwyhwj00p014ks76zxx290', // style URL
@@ -43,3 +41,5 @@ map.fitBounds(bounds, {
     right: 100
     }
 });
+}
+
