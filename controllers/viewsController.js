@@ -25,7 +25,13 @@ const catchAsync = require('./../utils/catchAsync')
 
     // 3) Render that template using tour data from 1)
     res.status(200).render('tour', {
-        title: 'The Forest Hiker Tour', 
+        title: `${tour.name}`, 
         tour
     })
 })
+
+exports.getLoginForm = (req, res) => {
+    res.status(200).render('login', {
+        title: 'Log into your account'
+    })
+}
