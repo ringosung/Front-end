@@ -2,7 +2,6 @@ const express = require('express')
 const userController = require('./../controllers/userController')
 const authController = require('./../controllers/authController')
 
-
 const router = express.Router();
 
 router.post('/signup', authController.signup)
@@ -14,10 +13,15 @@ router.patch('/resetPassword/:token', authController.resetPassword)
 // all routes below this middleware have to login
 router.use(authController.protect);
 
-router.patch('/updateMyPassword', authController.protect, authController.updatePassword)
+router.patch('/updateMyPassword', authController.updatePassword)
 
 router.get('/me', userController.getMe, userController.getUser)
-router.patch('/updateMe', userController.updateMe)
+router.patch(
+    '/updateMe',
+    userController.uploadUserPhoto,
+    userController.resizeUserPhoto,
+    userController.updateMe
+  );
 router.delete('/deleteMe', userController.deleteMe)
 
 // all routes below this middleware have to be logged in as admin
