@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
         minlength: 8,
         select: false
     },
-    passwordConfirmation: {
+    passwordConfirm: {
         type: String,
         required: [true, 'Please enter password confirmation'],
         validate:{

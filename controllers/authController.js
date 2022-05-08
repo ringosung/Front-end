@@ -43,7 +43,7 @@ exports.signup = catchAsync(async (req, res, next) => {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-        passwordConfirmation: req.body.passwordConfirmation,
+        passwordConfirm: req.body.passwordConfirm,
         passwordChangedAt: req.body.passwordChangedAt,
         role: req.body.role
     });
@@ -224,7 +224,7 @@ exports.resetPassword = catchAsync(async(req, res, next) => {
         return next(new AppError('Token is invalid or expired', 400))
     }
     user.password = req.body.password;
-    user.passwordConfirmation = req.body.passwordConfirmation;
+    user.passwordConfirm = req.body.passwordConfirm;
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
     await user.save();
@@ -248,7 +248,7 @@ exports.updatePassword = catchAsync(async(req, res, next) => {
     // 3) update the password 
 
     user.password = req.body.password;
-    user.passwordConfirmation = req.body.passwordConfirmation;
+    user.passwordConfirm = req.body.passwordConfirm;
     await user.save();
 
 
