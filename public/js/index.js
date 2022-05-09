@@ -1,9 +1,11 @@
 /* eslint-disable*/
+// import js files
 import '@babel/polyfill'
 import { displayMap } from './mapbox';
 import { login, logout } from './login'
 import { updateSettings } from './updateSettings'
 import { signup } from './signup';
+import { deleteTour } from './deleteTour'
 
 // DOM element
 const mapBox = document.getElementById('map');
@@ -12,6 +14,7 @@ const logOutBtn = document.querySelector('.nav__el--logout');
 const userDataForm = document.querySelector('.form-user-data')
 const userPasswordForm = document.querySelector('.form-user-password')
 const signupForm = document.querySelector('.form--signup');
+const deletetour = document.querySelector('.btn--small');
 
 
 // Delegation
@@ -73,3 +76,17 @@ if (userDataForm)
           signup(name, email, password, confirmPassword);
         });
       }
+
+
+     
+
+
+if (deletetour)
+    deletetour.addEventListener('click', e => {
+        e.preventDefault();
+        const form = new FormData();
+        form.append('id', document.getElementById('id').value);
+        console.log(form);
+  
+        deleteTour(form, 'data');
+    });
