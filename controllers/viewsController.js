@@ -61,7 +61,7 @@ exports.getSignUpForm = (req, res) => {
     });
   };
 
-  exports.deleteTour = catchAsync(async (req, res, next) => {
+exports.deleteTour = catchAsync(async (req, res, next) => {
     // 1) Get tour data from collection
     const tours = await Tour.find();
   

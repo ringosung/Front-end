@@ -11421,26 +11421,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 // type is either 'password' or 'data'
 var deleteTour = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(data, type) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(type) {
     var url, res;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
-            url = type === 'password' ? 'http://127.0.0.1:3000/api/v1/users/updateMyPassword' : 'http://127.0.0.1:3000/api/v1/users/updateMe';
+            url = type === 'password' ? 'http://127.0.0.1:3000/api/v1/tours/' : 'http://127.0.0.1:3000/api/v1/tours/';
             _context.next = 4;
             return (0, _axios.default)({
               method: 'DELETE',
-              url: url,
-              data: data
+              url: url
             });
 
           case 4:
             res = _context.sent;
 
             if (res.data.status === 'success') {
-              (0, _alerts.showAlert)('success', "".concat(type.toUpperCase(), " deleted successfully!"));
+              (0, _alerts.showAlert)('success', "".concat(type.toUpperCase(), " updated successfully!"));
             }
 
             _context.next = 11;
@@ -11459,7 +11458,7 @@ var deleteTour = /*#__PURE__*/function () {
     }, _callee, null, [[0, 8]]);
   }));
 
-  return function deleteTour(_x, _x2) {
+  return function deleteTour(_x) {
     return _ref.apply(this, arguments);
   };
 }();

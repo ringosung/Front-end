@@ -14,7 +14,7 @@ const logOutBtn = document.querySelector('.nav__el--logout');
 const userDataForm = document.querySelector('.form-user-data')
 const userPasswordForm = document.querySelector('.form-user-password')
 const signupForm = document.querySelector('.form--signup');
-const deletetour = document.querySelector('.btn--small');
+const deletetour = document.querySelector('.form-user-data2');
 
 
 // Delegation
@@ -78,15 +78,12 @@ if (userDataForm)
       }
 
 
-     
-
-
 if (deletetour)
-    deletetour.addEventListener('click', e => {
+    deletetour.addEventListener('submit', e => {
         e.preventDefault();
         const form = new FormData();
-        form.append('id', document.getElementById('id').value);
+        form.append('tourid', document.getElementById('tourid').value);
         console.log(form);
-  
         deleteTour(form, 'data');
     });
+
