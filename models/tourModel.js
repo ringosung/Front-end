@@ -8,31 +8,36 @@ const validator = require('validator')
 const tourSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'A tour must have a name'],
+        required: [true, 'A dog must have a name'],
         unique: true,
         trim: true,
-        maxlength: [40, 'A tour name must be less or equal than 40 characters'],
-        minlength: [10, 'A tour name must be greater than 10 characters'],
+        maxlength: [40, 'A dog name must be less or equal than 40 characters'],
+        minlength: [5, 'A dog name must be greater than 5 characters'],
        // validate: [validator.isAlpha, 'Tour name must only contain characters']
     },
     slug: String,
     duration: {
         type: Number,
-        required: [true, 'A tour must have a duration']
+        //required: [true, 'A dog must have a no home day']
     },
+    breeds: {
+      type: String,
+      required: [true, 'A dog must have a breeds']
+  },
     maxGroupSize: {
         type: Number,
-        required: [true, 'A tour must have a group size']
+        //required: [true, 'A dog must have a group size']
     },
     difficulty: {
         type: String,
-        required: [true, 'A tour must have a difficulty'],
+        required: [true, 'A dog must have a size'],
         enum: {
-            values: ['easy', 'medium', 'difficult'],
-            message: 'Difficulty is either: easy, medium, difficult'
+            values: ['small', 'medium', 'large'],
+            message: 'Dog Size is either: small, medium, large'
         }
     },
 
+    // for future development use
     ratingsAverage: {
         type: Number,
         default: 4.5,
@@ -46,7 +51,7 @@ const tourSchema = new mongoose.Schema({
     },
     price: {
         type: Number,
-        required: [true, 'A tour must have a price']
+        required: [true, 'A dog must have a age']
     },
     priceDiscount: {
         type: Number,
@@ -60,7 +65,7 @@ const tourSchema = new mongoose.Schema({
     summary:{
         type: String,
         trim: true,
-        required: [true, 'A tour must have a description']
+        required: [true, 'A dog must have a description']
     },
     description:{
         type: String,
@@ -68,7 +73,8 @@ const tourSchema = new mongoose.Schema({
     },
     imageCover:{
         type: String,
-        required: [true, 'A tour must have a cover image']
+        default: 'defaultdog.jpg'
+        // required: [true, 'A dog must have a cover image']
     },
     images: [String],
     createdAt: {
@@ -76,35 +82,35 @@ const tourSchema = new mongoose.Schema({
         default: Date.now(),
         select: false
     },
-    startDates: [Date],
+    // startDates: [Date],
     secretTour: {
         type: Boolean,
         default: false
     },
-    startLocation: {
-        // GeoJSON
-        type: {
-          type: String,
-          default: 'Point',
-          enum: ['Point']
-        },
-        coordinates: [Number],
-        address: String,
-        description: String
-      },
-      locations: [
-        {
-          type: {
-            type: String,
-            default: 'Point',
-            enum: ['Point']
-          },
-          coordinates: [Number],
-          address: String,
-          description: String,
-          day: Number
-        }
-      ],
+    // startLocation: {
+    //     // GeoJSON
+    //     type: {
+    //       type: String,
+    //       default: 'Point',
+    //       enum: ['Point']
+    //     },
+    //     coordinates: [Number],
+    //     address: String,
+    //     description: String
+    //   },
+    //   locations: [
+    //     {
+    //       type: {
+    //         type: String,
+    //         default: 'Point',
+    //         enum: ['Point']
+    //       },
+    //       coordinates: [Number],
+    //       address: String,
+    //       description: String,
+    //       day: Number
+    //     }
+    //   ],
 guides: [
     {
       type: mongoose.Schema.ObjectId,

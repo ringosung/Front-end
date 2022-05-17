@@ -1,0 +1,28 @@
+extends base 
+
+block content
+  main.main
+    .login-form
+      h2.heading-secondary.ma-bt-lg Add new dog
+      form.form.form--newDog
+        .form__group
+          label.form__label(for='name') Dog's Name
+          input#name.form__input(type='text', required)
+        .form__group
+          label.form__label(for='breeds') Breeds
+          input#breeds.form__input(type='String', placeholder='Just dog', required)
+        .form__group
+          label.form__label(for='price') Age
+          input#price.form__input(type='Number', placeholder='small', required)
+        .form__group
+          label.form__label(for='summary') Summary
+          input#summary.form__input(type='text', placeholder='summary', required)
+        .form__group
+          label.form__label(for='description') description
+          input#description.form__input(type='String', placeholder='description', required)
+        .form__group.ma-bt-md
+          label.form__label(for='difficulty') Dog Size
+          input#difficulty.form__input(type='text', placeholder='small', required)       
+        .form__group
+          button.btn.btn--green Add
+

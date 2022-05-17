@@ -5,7 +5,9 @@ import { displayMap } from './mapbox';
 import { login, logout } from './login'
 import { updateSettings } from './updateSettings'
 import { signup } from './signup';
-import { deleteTour } from './deleteTour'
+import { deleteTour } from './deleteTour';
+import { newDog } from './newDog';
+import { bookTour } from './stripe'
 
 // DOM element
 const mapBox = document.getElementById('map');
@@ -14,7 +16,9 @@ const logOutBtn = document.querySelector('.nav__el--logout');
 const userDataForm = document.querySelector('.form-user-data')
 const userPasswordForm = document.querySelector('.form-user-password')
 const signupForm = document.querySelector('.form--signup');
-const deletetour = document.querySelector('.form-user-data2');
+const deleteBtn = document.getElementById('delete-dog');
+const newDogForm = document.querySelector('.form--newDog');
+const bookBtn = document.getElementById('book-tour')
 
 
 // Delegation
@@ -76,14 +80,32 @@ if (userDataForm)
           signup(name, email, password, confirmPassword);
         });
       }
+      
 
+if (deleteBtn)
+    deleteBtn.addEventListener('click', e => {
+        // const tourId = e.target.dataset.tourId;
+        const {tourId} = e.target.dataset;
+        deleteTour(tourId);
+    })
 
-if (deletetour)
-    deletetour.addEventListener('submit', e => {
-        e.preventDefault();
-        const form = new FormData();
-        form.append('tourid', document.getElementById('tourid').value);
-        console.log(form);
-        deleteTour(form, 'data');
-    });
+if (newDogForm) {
+        newDogForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const name = document.getElementById('name').value;
+          const breeds = document.getElementById('breeds').value;
+          const price = document.getElementById('price').value;
+          const summary = document.getElementById('summary').value;
+          const description = document.getElementById('description').value;
+          const difficulty = document.getElementById('difficulty').value;
+          newDog(name, breeds, price, summary, description, difficulty);
+        });
+      }
 
+if(bookBtn)
+      bookBtn.addEventListener('click', e => {
+          // const tourId = e.target.dataset.tourId;
+          e.target.textContent = 'Processing...'
+          const {tourId} = e.target.dataset;
+          bookTour(tourId);
+      })
