@@ -42,5 +42,4 @@ block content
               span.card__footer-value= tour.ratingsAverage
               | 
               span.card__footer-text= `rating (${tour.ratingsQuantity})`
-              button.btn.btn--green.span-all-rows#delete-dog(data-tour-id=`${tour.id}`) Delete
-            //- a.btn.btn--green.btn--small(href=`/tour/${tour.slug}`) Details
+            a.btn.btn--green.btn--small(href=`/deleteDogDetail/${tour.slug}`) Details

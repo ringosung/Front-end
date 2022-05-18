@@ -85,6 +85,7 @@ if (userDataForm)
 if (deleteBtn)
     deleteBtn.addEventListener('click', e => {
         // const tourId = e.target.dataset.tourId;
+        e.target.textContent = 'Processing...'
         const {tourId} = e.target.dataset;
         deleteTour(tourId);
     })

@@ -13,6 +13,7 @@ router.get('/login', authController.isLoggedIn, viewsController.getLoginForm);
 router.get('/me', authController.protect, viewsController.getAccount);
 router.get('/signup', viewsController.getSignUpForm);
 router.get('/deleteTour', authController.isLoggedIn, viewsController.deleteTour);
+router.get('/deleteDogDetail/:slug', authController.isLoggedIn, viewsController.deleteDogDetail);
 router.get('/newDog', authController.isLoggedIn, viewsController.newDog);
 router.get('/my-tours', authController.protect, viewsController.getMyTours)
 

@@ -11424,29 +11424,18 @@ var deleteTour = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.prev = 0;
-            _context.next = 3;
-            return (0, _axios.default)({
-              method: 'delete',
-              url: "http://127.0.0.1:3000/api/v1/tours/".concat(tourId)
-            });
+            _context.next = 2;
+            return _axios.default.delete("http://127.0.0.1:3000/api/v1/tours/".concat(tourId));
+
+          case 2:
+            res = _context.sent;
 
           case 3:
-            res = _context.sent;
-            _context.next = 9;
-            break;
-
-          case 6:
-            _context.prev = 6;
-            _context.t0 = _context["catch"](0);
-            showAlert('error', _context.t0.response.data.message);
-
-          case 9:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 6]]);
+    }, _callee);
   }));
 
   return function deleteTour(_x) {
@@ -12010,7 +11999,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59386" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62721" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
