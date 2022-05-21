@@ -13,16 +13,23 @@ block content
           input#breeds.form__input(type='String', placeholder='Just dog', required)
         .form__group
           label.form__label(for='price') Age
-          input#price.form__input(type='Number', placeholder='small', required)
+          input#price.form__input(type='Number', placeholder='3', required)
         .form__group
           label.form__label(for='summary') Summary
           input#summary.form__input(type='text', placeholder='summary', required)
         .form__group
-          label.form__label(for='description') description
-          input#description.form__input(type='String', placeholder='description', required)
+          label.form__label(for='descriptionDog') descriptionDog
+          input#descriptionDog.form__input(type='String', placeholder='description', required)
         .form__group.ma-bt-md
           label.form__label(for='difficulty') Dog Size
-          input#difficulty.form__input(type='text', placeholder='small', required)       
+          input#difficulty.form__input(type='text', placeholder='small', required)
+        .form__group.ma-bt-md
+          label.form__label(for='address') Select Shelter:
+          select#address(name='address')
+            option(value='Kwai Chung') Kwai Chung Shelter
+            option(value=114.19299052000588, 22.339820809665305) Wong Tai Sin Shelter
+            option(value='pumpernickel') Pumpernickel
+            option(value='reeses') Reeses
         .form__group
           button.btn.btn--green Add
 

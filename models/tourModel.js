@@ -67,8 +67,9 @@ const tourSchema = new mongoose.Schema({
         trim: true,
         required: [true, 'A dog must have a description']
     },
-    description:{
+    descriptionDog:{
         type: String,
+        default: 'testing',
         trim: true
     },
     imageCover:{
@@ -98,23 +99,33 @@ const tourSchema = new mongoose.Schema({
     //     address: String,
     //     description: String
     //   },
-    //   locations: [
-    //     {
-    //       type: {
-    //         type: String,
-    //         default: 'Point',
-    //         enum: ['Point']
-    //       },
-    //       coordinates: [Number],
-    //       address: String,
-    //       description: String,
-    //       day: Number
-    //     }
-    //   ],
+      locations: [
+        {
+          type: {
+            type: String,
+            default: 'Point',
+            enum: ['Point']
+          },
+          coordinates: [Number],
+          address: {
+            type: String,
+            default: 'Kowloon City'
+          },
+          description: {
+            type: String,
+            default: 'Shelter 1'
+          },
+          day: {
+            type: Number,
+            default: 1
+          }
+        }
+      ],
 guides: [
     {
       type: mongoose.Schema.ObjectId,
-      ref: 'User'
+      ref: 'User',
+      default: '5c8a1ec62f8fb814b56fa183'
     }
   ]
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { showAlert } from './alerts';
 
-export const newDog = async (name, breeds, price, summary, description, difficulty) => {
+export const newDog = async (name, breeds, price, summary, descriptionDog, difficulty, coordinates, address, description) => {
   try {
     const res = await axios({
       method: 'POST',
@@ -11,8 +11,9 @@ export const newDog = async (name, breeds, price, summary, description, difficul
         breeds,
         price,
         summary,
-        description,
-        difficulty
+        descriptionDog,
+        difficulty,
+        locations:{coordinates, address, description},
       },
     });
 

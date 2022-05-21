@@ -31,10 +31,10 @@ block content
                     svg.heading-box__icon
                         use(xlink:href='/img/icons.svg#icon-clock')
                     span.heading-box__text= `${tour.breeds} breeds`
-                //- .heading-box__detail
-                //-     svg.heading-box__icon
-                //-         use(xlink:href='/img/icons.svg#icon-map-pin')
-                //-     span.heading-box__text= tour.startLocation.description
+                .heading-box__detail
+                    //- svg.heading-box__icon
+                    //-     use(xlink:href='/img/icons.svg#icon-map-pin')
+                    //- span.heading-box__text= tour.startLocation.description
 
     section.section-description
         .overview-box
@@ -61,17 +61,17 @@ block content
 
         .description-box
             h2.heading-secondary.ma-bt-lg= `About ${tour.name}`
-            - const parapraphs = tour.description.split('\n');
+            - const parapraphs = tour.descriptionDog.split('\n');
             each p in parapraphs
                 p.description__text= p
 
-    section.section-pictures
-        each img, i in tour.images
-            .picture-box
-                img.picture-box__img(src=`/img/tours/${img}`, alt=`${tour.name} Tour ${i+1}`, class=`.picture-box__img--${i+1}`)
+    //- section.section-pictures
+    //-     each img, i in tour.images
+    //-         .picture-box
+    //-             img.picture-box__img(src=`/img/tours/${img}`, alt=`${tour.name} Tour ${i+1}`, class=`.picture-box__img--${i+1}`)
 
-    //- section.section-map
-    //-     #map(data-locations=`${JSON.stringify(tour.locations)}`)
+    section.section-map
+        #map(data-locations=`${JSON.stringify(tour.locations)}`)
 
     //- section.section-reviews
     //-     .reviews

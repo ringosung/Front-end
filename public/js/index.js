@@ -97,9 +97,23 @@ if (newDogForm) {
           const breeds = document.getElementById('breeds').value;
           const price = document.getElementById('price').value;
           const summary = document.getElementById('summary').value;
-          const description = document.getElementById('description').value;
+          const descriptionDog = document.getElementById('descriptionDog').value;
           const difficulty = document.getElementById('difficulty').value;
-          newDog(name, breeds, price, summary, description, difficulty);
+          const address = document.getElementById('address').value;
+          function addressConvert(address) {
+            if (address == 'Kwai Chung') {
+            const coordinates = [114.1391967095326, 22.369401714208063]
+            const address = 'Shop 18, G/F, Shui King Building, 144 Wo Yi Hop Road, Kwai Chung, N.T.'
+            const description = 'Shelter at Kwai Chung'
+            return {coordinates, address, description}
+            }
+          }
+          const coordinatesObj = addressConvert(address);
+          const coordinates = coordinatesObj.coordinates;
+          const locationAddress = coordinatesObj.address;
+          const locationDescription = coordinatesObj.description;
+          
+          newDog(name, breeds, price, summary, descriptionDog, difficulty, coordinates, locationAddress, locationDescription);
         });
       }
 

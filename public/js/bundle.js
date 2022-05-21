@@ -6672,15 +6672,17 @@ exports.displayMap = void 0;
 
 /* eslint-disable */
 var displayMap = function displayMap(locations) {
-  mapboxgl.accessToken = 'pk.eyJ1IjoicmluZ29zdW5nIiwiYSI6ImNsMnV1bDEyNTA1cWwza3F0aHBiNXUxOHcifQ.OXQERgSrPqWB91MOZcqFhg';
+  mapboxgl.accessToken = 'pk.eyJ1IjoicmluZ29zdW5nIiwiYSI6ImNsMnVyZXltczAxZWwzYnFvaHM4MTQ0M3YifQ.tmcOS4XeHwTTiYo7ICWa4A';
   var map = new mapboxgl.Map({
     container: 'map',
     // container ID
     style: 'mapbox://styles/ringosung/cl2uwyhwj00p014ks76zxx290',
     // style URL
-    scrollZoom: false // center: [-74.5, 40], // starting position [lng, lat]
-    // zoom: 9 // starting zoom
-
+    zoom: 10,
+    // starting zoom
+    maxZoom: 18,
+    scrollZoom: true,
+    center: [114.18944925945331, 22.329196444960935]
   });
   var bounds = new mapboxgl.LngLatBounds();
   locations.forEach(function (loc) {
@@ -6693,7 +6695,7 @@ var displayMap = function displayMap(locations) {
     }).setLngLat(loc.coordinates).addTo(map);
     new mapboxgl.Popup({
       offset: 30
-    }).setLngLat(loc.coordinates).setHTML("<p>Day ".concat(loc.day, ": ").concat(loc.description, "</p>")).addTo(map); // Extend map bounds to include current locations
+    }).setLngLat(loc.coordinates).setHTML("<p>".concat(loc.description, "</p>Address: <p>").concat(loc.address, "</p>")).addTo(map); // Extend map bounds to include current locations
 
     bounds.extend(loc.coordinates);
   });
@@ -11463,7 +11465,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var newDog = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(name, breeds, price, summary, description, difficulty) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(name, breeds, price, summary, descriptionDog, difficulty, coordinates, address, description) {
     var res;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -11479,8 +11481,13 @@ var newDog = /*#__PURE__*/function () {
                 breeds: breeds,
                 price: price,
                 summary: summary,
-                description: description,
-                difficulty: difficulty
+                descriptionDog: descriptionDog,
+                difficulty: difficulty,
+                locations: {
+                  coordinates: coordinates,
+                  address: address,
+                  description: description
+                }
               }
             });
 
@@ -11510,7 +11517,7 @@ var newDog = /*#__PURE__*/function () {
     }, _callee, null, [[0, 7]]);
   }));
 
-  return function newDog(_x, _x2, _x3, _x4, _x5, _x6) {
+  return function newDog(_x, _x2, _x3, _x4, _x5, _x6, _x7, _x8, _x9) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -11948,6 +11955,7 @@ if (signupForm) {
 
 if (deleteBtn) deleteBtn.addEventListener('click', function (e) {
   // const tourId = e.target.dataset.tourId;
+  e.target.textContent = 'Processing...';
   var tourId = e.target.dataset.tourId;
   (0, _deleteTour.deleteTour)(tourId);
 });
@@ -11959,9 +11967,28 @@ if (newDogForm) {
     var breeds = document.getElementById('breeds').value;
     var price = document.getElementById('price').value;
     var summary = document.getElementById('summary').value;
-    var description = document.getElementById('description').value;
+    var descriptionDog = document.getElementById('descriptionDog').value;
     var difficulty = document.getElementById('difficulty').value;
-    (0, _newDog.newDog)(name, breeds, price, summary, description, difficulty);
+    var address = document.getElementById('address').value;
+
+    function addressConvert(address) {
+      if (address == 'Kwai Chung') {
+        var _coordinates = [114.1391967095326, 22.369401714208063];
+        var _address = 'Shop 18, G/F, Shui King Building, 144 Wo Yi Hop Road, Kwai Chung, N.T.';
+        var description = 'Shelter at Kwai Chung';
+        return {
+          coordinates: _coordinates,
+          address: _address,
+          description: description
+        };
+      }
+    }
+
+    var coordinatesObj = addressConvert(address);
+    var coordinates = coordinatesObj.coordinates;
+    var locationAddress = coordinatesObj.address;
+    var locationDescription = coordinatesObj.description;
+    (0, _newDog.newDog)(name, breeds, price, summary, descriptionDog, difficulty, coordinates, locationAddress, locationDescription);
   });
 }
 
@@ -11999,7 +12026,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62721" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53574" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
