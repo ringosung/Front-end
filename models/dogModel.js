@@ -108,13 +108,16 @@ const dogSchema = new mongoose.Schema({
           }
         }
       ],
-guides: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: 'User',
-      default: ['5c8a1dfa2f8fb814b56fa181']
+guides: 
+    [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+        default: '5c8a1dfa2f8fb814b56fa181'
+      
     }
   ]
+  
 
 }, 
     

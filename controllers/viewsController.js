@@ -34,9 +34,7 @@ const Booking = require('../models/bookingModel')
 })
 
 exports.getLoginForm = (req, res) => {
-    // res.status(200).render('login', {
-    //     title: 'Log into your account'
-    // })
+
     res
     .status(200)
     .set(

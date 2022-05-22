@@ -83,9 +83,8 @@ if (userDataForm)
       
 
 if (deleteBtn)
-    deleteBtn.addEventListener('click', e => {
+    deleteBtn.addEventListener('click', (e) => {
         // const dogId = e.target.dataset.dogId;
-        e.target.textContent = 'Processing...'
         const {dogId} = e.target.dataset;
         deleteDog(dogId);
     })

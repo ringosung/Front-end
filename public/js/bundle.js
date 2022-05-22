@@ -11241,21 +11241,22 @@ var logout = /*#__PURE__*/function () {
             _context2.next = 3;
             return (0, _axios.default)({
               method: 'GET',
-              url: 'http://127.0.0.1:3000/api/v1/users/logout'
+              url: '/api/v1/users/logout'
             });
 
           case 3:
             res = _context2.sent;
-            if (res.data.status = 'success') location.reload(true);
-            _context2.next = 10;
+            if (res.data.status = 'success') location.replace('/');
+            _context2.next = 11;
             break;
 
           case 7:
             _context2.prev = 7;
             _context2.t0 = _context2["catch"](0);
+            console.log(_context2.t0.response);
             (0, _alerts.showAlert)('error', 'Error logging out! Try again.');
 
-          case 10:
+          case 11:
           case "end":
             return _context2.stop();
         }
@@ -11413,6 +11414,8 @@ exports.deleteDog = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
 
+var _alerts = require("./alerts");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -11426,18 +11429,30 @@ var deleteDog = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.next = 2;
+            _context.prev = 0;
+            _context.next = 3;
             return _axios.default.delete("http://127.0.0.1:3000/api/v1/dogs/".concat(dogId));
 
-          case 2:
-            res = _context.sent;
-
           case 3:
+            res = _context.sent;
+            (0, _alerts.showAlert)('success', 'Doggy deleted successfully');
+            window.setTimeout(function () {
+              location.assign('/');
+            }, 1500);
+            _context.next = 11;
+            break;
+
+          case 8:
+            _context.prev = 8;
+            _context.t0 = _context["catch"](0);
+            (0, _alerts.showAlert)('error', _context.t0.response.data.message);
+
+          case 11:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee);
+    }, _callee, null, [[0, 8]]);
   }));
 
   return function deleteDog(_x) {
@@ -11446,7 +11461,7 @@ var deleteDog = /*#__PURE__*/function () {
 }();
 
 exports.deleteDog = deleteDog;
-},{"axios":"../../node_modules/axios/index.js"}],"newDog.js":[function(require,module,exports) {
+},{"axios":"../../node_modules/axios/index.js","./alerts":"alerts.js"}],"newDog.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11955,7 +11970,6 @@ if (signupForm) {
 
 if (deleteBtn) deleteBtn.addEventListener('click', function (e) {
   // const dogId = e.target.dataset.dogId;
-  e.target.textContent = 'Processing...';
   var dogId = e.target.dataset.dogId;
   (0, _deleteDog.deleteDog)(dogId);
 });
