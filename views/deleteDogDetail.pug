@@ -67,15 +67,6 @@ block content
             .picture-box
                 img.picture-box__img(src=`/img/dogs/${img}`, alt=`${dog.name} Dog ${i+1}`, class=`.picture-box__img--${i+1}`)
 
-    //- section.section-map
-    //-     #map(data-locations=`${JSON.stringify(dog.locations)}`)
-
-    //- section.section-reviews
-    //-     .reviews
-    //-         each review in dog.reviews
-    //-             +reviewCard(review)
-
-
     section.section-cta
         .cta
             .cta__img.cta__img--logo
@@ -87,6 +78,3 @@ block content
                     button.btn.btn--green.span-all-rows#delete-dog(data-dog-id=`${dog.id}`) Delete
                 else
                     a.btn.btn--green.span-all-rows(herf='/login') User Login
-
-              
-            //- a.btn.btn--green.btn--small(href=`/dog/${dog.slug}`) Details

@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
-
 const slugify = require('slugify');
 const validator = require('validator')
-
-
 
 const dogSchema = new mongoose.Schema({
     name: {
@@ -16,17 +13,13 @@ const dogSchema = new mongoose.Schema({
        // validate: [validator.isAlpha, 'Dog name must only contain characters']
     },
     slug: String,
-    duration: {
-        type: Number,
-        //required: [true, 'A dog must have a no home day']
-    },
     breeds: {
       type: String,
       required: [true, 'A dog must have a breeds']
   },
     maxGroupSize: {
         type: Number,
-        //required: [true, 'A dog must have a group size']
+        default: 10
     },
     difficulty: {
         type: String,
