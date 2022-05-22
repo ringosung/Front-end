@@ -13,7 +13,7 @@ block content
       nav.user-view__menu
         ul.side-nav
           +navItem('#', 'Settings', 'settings', true)
-          +navItem('/my-tours', 'My bookings', 'briefcase')
+          +navItem('/my-dogs', 'My bookings', 'briefcase')
           
 
         - if (user.role === 'admin')
@@ -21,7 +21,7 @@ block content
             h5.admin-nav__heading Admin
             ul.side-nav
               +navItem('/newDog', 'Add new dog', 'users')
-              +navItem('/deleteTour', 'delete dog', 'map')
+              +navItem('/deleteDog', 'delete dog', 'map')
 
 
       .user-view__content

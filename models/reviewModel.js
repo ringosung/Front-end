@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Tour = require('./tourModel')
+const Dog = require('./dogModel')
 
 const reviewSchema = new mongoose.Schema({
     review: {
@@ -15,10 +15,10 @@ const reviewSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    tour: {
+    dog: {
         type: mongoose.Schema.ObjectId,
-        ref: 'Tour',
-        required: [true, 'Review must have tour']
+        ref: 'Dog',
+        required: [true, 'Review must have dog']
     },
     user: {
         type: mongoose.Schema.ObjectId,
@@ -31,11 +31,11 @@ const reviewSchema = new mongoose.Schema({
     toObject: { virtuals: true}
 });
 
-reviewSchema.index({ tour: 1, user: 1 }, {unique: true});
+reviewSchema.index({ dog: 1, user: 1 }, {unique: true});
 
 reviewSchema.pre(/^find/, function(next) {
 //     this.populate({
-//   path: 'tour',
+//   path: 'dog',
 //   select: 'name'
 //   }).populate({
 //     path: 'user',
@@ -49,15 +49,15 @@ reviewSchema.pre(/^find/, function(next) {
   next();
 });
 
-reviewSchema.statics.calcAverageRatings = async function(tourId) {
+reviewSchema.statics.calcAverageRatings = async function(dogId) {
     const stats = await this.aggregate([
         {
-            $match: {tour: tourId}
+            $match: {dog: dogId}
         },
         {
             $group: {
-                //group all the data by tour
-                _id: '$tour',
+                //group all the data by dog
+                _id: '$dog',
                 nRating: { $sum: 1},
                 avgRating: {$avg: '$rating'}
             }
@@ -65,14 +65,14 @@ reviewSchema.statics.calcAverageRatings = async function(tourId) {
     ]);
   
 
-    // update tour after calculating rating
+    // update dog after calculating rating
     if (stats.length > 0) {
-        await Tour.findByIdAndUpdate(tourId, {
+        await Dog.findByIdAndUpdate(dogId, {
           ratingsQuantity: stats[0].nRating,
           ratingsAverage: stats[0].avgRating
         });
       } else {
-        await Tour.findByIdAndUpdate(tourId, {
+        await Dog.findByIdAndUpdate(dogId, {
           ratingsQuantity: 0,
           ratingsAverage: 4.5
         });
@@ -82,11 +82,11 @@ reviewSchema.statics.calcAverageRatings = async function(tourId) {
 // call middleware for calcAverageRatings
 reviewSchema.post('save', function() {
     // this points to current review
-    this.constructor.calcAverageRatings(this.tour);
+    this.constructor.calcAverageRatings(this.dog);
 })
 
 reviewSchema.post(/^findOneAnd/, async function (docs) {
-    await docs.constructor.calcAverageRatings(docs.tour);
+    await docs.constructor.calcAverageRatings(docs.dog);
   });
 
 const Review = mongoose.model('Review', reviewSchema);

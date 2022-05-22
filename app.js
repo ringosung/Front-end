@@ -11,7 +11,7 @@ const csp = require('express-csp');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
-const tourRouter = require('./routes/tourRoutes');
+const dogRouter = require('./routes/dogRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
@@ -138,17 +138,17 @@ app.use((req, res, next) => {
 })
 
 
-/* app.get('/api/v1/tours', getAllTours);
-app.get('/api/v1/tours/:id', getTour);
-app.post('/api/v1/tours', createTour);
-app.update('/api/v1/tours/:id', updateTour);
-app.delete('/api/v1/tours/:id', deleteTour); */
+/* app.get('/api/v1/dogs', getAllDogs);
+app.get('/api/v1/dogs/:id', getDog);
+app.post('/api/v1/dogs', createDog);
+app.update('/api/v1/dogs/:id', updateDog);
+app.delete('/api/v1/dogs/:id', deleteDog); */
 
 // 3) Routes
 
 
 app.use('/', viewRouter);
-app.use('/api/v1/tours', tourRouter)
+app.use('/api/v1/dogs', dogRouter)
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/reviews', reviewRouter)
 app.use('/api/v1/bookings', bookingRouter)

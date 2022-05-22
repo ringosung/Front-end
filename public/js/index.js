@@ -5,9 +5,9 @@ import { displayMap } from './mapbox';
 import { login, logout } from './login'
 import { updateSettings } from './updateSettings'
 import { signup } from './signup';
-import { deleteTour } from './deleteTour';
+import { deleteDog } from './deleteDog';
 import { newDog } from './newDog';
-import { bookTour } from './stripe'
+import { bookDog } from './stripe'
 
 // DOM element
 const mapBox = document.getElementById('map');
@@ -18,7 +18,7 @@ const userPasswordForm = document.querySelector('.form-user-password')
 const signupForm = document.querySelector('.form--signup');
 const deleteBtn = document.getElementById('delete-dog');
 const newDogForm = document.querySelector('.form--newDog');
-const bookBtn = document.getElementById('book-tour')
+const bookBtn = document.getElementById('book-dog')
 
 
 // Delegation
@@ -84,10 +84,10 @@ if (userDataForm)
 
 if (deleteBtn)
     deleteBtn.addEventListener('click', e => {
-        // const tourId = e.target.dataset.tourId;
+        // const dogId = e.target.dataset.dogId;
         e.target.textContent = 'Processing...'
-        const {tourId} = e.target.dataset;
-        deleteTour(tourId);
+        const {dogId} = e.target.dataset;
+        deleteDog(dogId);
     })
 
 if (newDogForm) {
@@ -131,8 +131,8 @@ if (newDogForm) {
 
 if(bookBtn)
       bookBtn.addEventListener('click', e => {
-          // const tourId = e.target.dataset.tourId;
+          // const dogId = e.target.dataset.dogId;
           e.target.textContent = 'Processing...'
-          const {tourId} = e.target.dataset;
-          bookTour(tourId);
+          const {dogId} = e.target.dataset;
+          bookDog(dogId);
       })

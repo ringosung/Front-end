@@ -8,14 +8,14 @@ const router = express.Router();
 
 
 router.get('/', bookingController.createBookingCheckout, authController.isLoggedIn, viewsController.getOverview);
-router.get('/tour/:slug', authController.isLoggedIn, viewsController.getTour);
+router.get('/dog/:slug', authController.isLoggedIn, viewsController.getDog);
 router.get('/login', authController.isLoggedIn, viewsController.getLoginForm);
 router.get('/me', authController.protect, viewsController.getAccount);
 router.get('/signup', viewsController.getSignUpForm);
-router.get('/deleteTour', authController.isLoggedIn, viewsController.deleteTour);
+router.get('/deleteDog', authController.isLoggedIn, viewsController.deleteDog);
 router.get('/deleteDogDetail/:slug', authController.isLoggedIn, viewsController.deleteDogDetail);
 router.get('/newDog', authController.isLoggedIn, viewsController.newDog);
-router.get('/my-tours', authController.protect, viewsController.getMyTours)
+router.get('/my-dogs', authController.protect, viewsController.getMyDogs)
 
 module.exports = router;
 

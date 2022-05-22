@@ -5,7 +5,7 @@ export const newDog = async (name, breeds, age, summary, descriptionDog, difficu
   try {
     const res = await axios({
       method: 'POST',
-      url: 'http://127.0.0.1:3000/api/v1/tours',
+      url: 'http://127.0.0.1:3000/api/v1/dogs',
       data: {
         name,
         breeds,

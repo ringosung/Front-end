@@ -3,9 +3,9 @@ const Review = require('./../models/reviewModel');
 const factory = require('../controllers/handlerFactory')
 
 
-exports.setTourUserIds = (req, res, next) => {
+exports.setDogUserIds = (req, res, next) => {
         //Allow nested routes
-        if (!req.body.tour) req.body.tour = req.params.tourId;
+        if (!req.body.dog) req.body.dog = req.params.dogId;
         if (!req.body.user) req.body.user = req.user.id;
         next();
 }

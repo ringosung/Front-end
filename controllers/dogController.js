@@ -1,9 +1,9 @@
 const multer = require('multer');
 const sharp = require('sharp');
-const Tour = require('./../models/tourModel');
-const catchAsync = require('./../utils/catchAsync')
-const factory = require('../controllers/handlerFactory')
-const AppError = require('./../utils/appError')
+const Dog = require('../models/dogModel');
+const catchAsync = require('../utils/catchAsync')
+const factory = require('./handlerFactory')
+const AppError = require('../utils/appError')
 
 const multerStorage = multer.memoryStorage();
 
@@ -20,7 +20,7 @@ const upload = multer({
   fileFilter: multerFilter
 });
 
-exports.uploadTourImages = upload.fields([
+exports.uploadDogImages = upload.fields([
     {name: 'imageCover', maxCount:1},
     {name: 'images', maxCount:3}
 ]);
@@ -28,29 +28,29 @@ exports.uploadTourImages = upload.fields([
 // upload.single('image')
 // upload.array('images', 5)
 
-exports.resizeTourImages = catchAsync(async (req, res, next) => {
+exports.resizeDogImages = catchAsync(async (req, res, next) => {
     if (!req.files.imageCover || !req.files.images) return next();
   
     // 1) Cover image
-    req.body.imageCover = `tour-${req.params.id}-${Date.now()}-cover.jpeg`;
+    req.body.imageCover = `dog-${req.params.id}-${Date.now()}-cover.jpeg`;
     await sharp(req.files.imageCover[0].buffer)
       .resize(2000, 1333)
       .toFormat('jpeg')
       .jpeg({ quality: 90 })
-      .toFile(`public/img/tours/${req.body.imageCover}`);
+      .toFile(`public/img/dogs/${req.body.imageCover}`);
   
     // 2) Images
     req.body.images = [];
   
     await Promise.all(
       req.files.images.map(async (file, i) => {
-        const filename = `tour-${req.params.id}-${Date.now()}-${i + 1}.jpeg`;
+        const filename = `dog-${req.params.id}-${Date.now()}-${i + 1}.jpeg`;
   
         await sharp(file.buffer)
           .resize(2000, 1333)
           .toFormat('jpeg')
           .jpeg({ quality: 90 })
-          .toFile(`public/img/tours/${filename}`);
+          .toFile(`public/img/dogs/${filename}`);
   
         req.body.images.push(filename);
       })
@@ -60,7 +60,7 @@ exports.resizeTourImages = catchAsync(async (req, res, next) => {
   });
   
 
-exports.aliasTopTours = (req, res, next) => {
+exports.aliasTopDogs = (req, res, next) => {
     req.query.limit = '5';
     req.query.sort = '-ratingsAverage,age';
     req.query.fields = 'name,age,ratingsAverage,summary,difficulty';
@@ -68,22 +68,22 @@ exports.aliasTopTours = (req, res, next) => {
 }
 
 
-exports.getAllTours = factory.getAll(Tour);
-exports.getTour = factory.getOne(Tour, {path: 'reviews'});
-exports.createTour = factory.createOne(Tour);
-exports.updateTour = factory.updateOne(Tour);
-exports.deleteTour = factory.deleteOne(Tour);
+exports.getAllDogs = factory.getAll(Dog);
+exports.getDog = factory.getOne(Dog, {path: 'reviews'});
+exports.createDog = factory.createOne(Dog);
+exports.updateDog = factory.updateOne(Dog);
+exports.deleteDog = factory.deleteOne(Dog);
 
-exports.getTourStats = catchAsync(async (req, res, next) => {
+exports.getDogStats = catchAsync(async (req, res, next) => {
     
-    const stats = await Tour.aggregate([
+    const stats = await Dog.aggregate([
             {
                 $match: { ratingsAverage: { $gte: 4.5}}
             },
             {
                 $group: {
                     _id: { $toUpper: '$difficulty'}, 
-                    numTours: { $sum: 1 },
+                    numDogs: { $sum: 1 },
                     numRatings: { $sum: '$ratingsQuantity'},
                     avgRating: { $avg: '$ratingsAverage'},
                     avgPrice: { $avg: '$age'},
@@ -114,7 +114,7 @@ exports.getMontylyPlan = catchAsync(async (req, res, next) => {
     
         const year = req.params.year * 1;
 
-        const plan = await Tour.aggregate([
+        const plan = await Dog.aggregate([
             {
                 $unwind: '$startDates'
             },
@@ -129,8 +129,8 @@ exports.getMontylyPlan = catchAsync(async (req, res, next) => {
             {
                 $group: { 
                     _id: { $month: '$startDates'},
-                    numTourStarts: { $sum: 1},
-                    tours: { $push: '$name'}
+                    numDogStarts: { $sum: 1},
+                    dogs: { $push: '$name'}
                 }
             },
             {
@@ -142,7 +142,7 @@ exports.getMontylyPlan = catchAsync(async (req, res, next) => {
                 }
             },
             {
-                $sort: {numTourStarts: -1}
+                $sort: {numDogStarts: -1}
             },
             {
                 $limit: 12
@@ -158,7 +158,7 @@ exports.getMontylyPlan = catchAsync(async (req, res, next) => {
         });
 })
 
-exports.getToursWithin = catchAsync(async (req, res, next) => {
+exports.getDogsWithin = catchAsync(async (req, res, next) => {
     const { distance, latlng, unit } = req.params;
     const [lat, lng] = latlng.split(',');
     
@@ -168,14 +168,14 @@ exports.getToursWithin = catchAsync(async (req, res, next) => {
         next(AppError('Please provide a lat and lng', 400))
     }
     
-    const tours = await Tour.find({startLocation: {$geoWithin: { $centerSphere: [[lng, lat], radius]}}
+    const dogs = await Dog.find({startLocation: {$geoWithin: { $centerSphere: [[lng, lat], radius]}}
     });
 
     res.status(200).json({
         status: 'success',
-        results: tours.length,
+        results: dogs.length,
         data:{
-            data:tours
+            data:dogs
         }
     })
 });
@@ -190,7 +190,7 @@ exports.getDistances = catchAsync(async (req, res, next) => {
         next(AppError('Please provide a lat and lng', 400))
     }
     
-    const distances = await Tour.aggregate([
+    const distances = await Dog.aggregate([
         {
           $geoNear: {
             near: {

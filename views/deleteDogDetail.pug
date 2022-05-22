@@ -21,20 +21,17 @@ block content
     section.section-header
         .header__hero
             .header__hero-overlay &nbsp;
-            img.header__hero-img(src=`/img/tours/${tour.imageCover}`, alt=`${tour.name}`)
+            img.header__hero-img(src=`/img/dogs/${dog.imageCover}`, alt=`${dog.name}`)
 
         .heading-box
             h1.heading-primary
-                span= `${tour.name} dog`
+                span= `${dog.name} dog`
             .heading-box__group
                 .heading-box__detail
                     svg.heading-box__icon
                         use(xlink:href='/img/icons.svg#icon-clock')
-                    span.heading-box__text= `${tour.breeds} breeds`
-                //- .heading-box__detail
-                //-     svg.heading-box__icon
-                //-         use(xlink:href='/img/icons.svg#icon-map-pin')
-                //-     span.heading-box__text= tour.startLocation.description
+                    span.heading-box__text= `${dog.breeds}`
+
 
     section.section-description
         .overview-box
@@ -42,15 +39,15 @@ block content
                 .overview-box__group
                     h2.heading-secondary.ma-bt-lg Quick facts
 
-                    //- - const date = tour.startDates[0].toLocaleString('en-us', {month: 'long', year: 'numeric'})
-                    //- +overviewBox('Birth', date, 'calendar')
-                    +overviewBox('Dog Size', tour.difficulty, 'trending-up')
-                    +overviewBox('Like', `${tour.maxGroupSize} people`, 'user')
+                    +overviewBox('Breeds', dog.breeds, 'trending-up')
+                    +overviewBox('Dog Size', dog.difficulty, 'trending-up')
+                    +overviewBox('Age', `${dog.age}`, 'clock')
+                    +overviewBox('Like', `${dog.maxGroupSize} people`, 'user')
 
                 .overview-box__group
                     h2.heading-secondary.ma-bt-lg Charity Worker
 
-                    each guide in tour.guides
+                    each guide in dog.guides
                         .overview-box__detail
                             img.overview-box__img(src=`/img/users/${guide.photo}`, alt=`${guide.name}`)
                             - if (guide.role === 'lead-guide')
@@ -60,22 +57,22 @@ block content
                             span.overview-box__text= guide.name
 
         .description-box
-            h2.heading-secondary.ma-bt-lg= `About ${tour.name}`
-            - const parapraphs = tour.description.split('\n');
+            h2.heading-secondary.ma-bt-lg= `About ${dog.name}`
+            - const parapraphs = dog.descriptionDog.split('\n');
             each p in parapraphs
                 p.description__text= p
 
     section.section-pictures
-        each img, i in tour.images
+        each img, i in dog.images
             .picture-box
-                img.picture-box__img(src=`/img/tours/${img}`, alt=`${tour.name} Tour ${i+1}`, class=`.picture-box__img--${i+1}`)
+                img.picture-box__img(src=`/img/dogs/${img}`, alt=`${dog.name} Dog ${i+1}`, class=`.picture-box__img--${i+1}`)
 
     //- section.section-map
-    //-     #map(data-locations=`${JSON.stringify(tour.locations)}`)
+    //-     #map(data-locations=`${JSON.stringify(dog.locations)}`)
 
     //- section.section-reviews
     //-     .reviews
-    //-         each review in tour.reviews
+    //-         each review in dog.reviews
     //-             +reviewCard(review)
 
 
@@ -83,13 +80,13 @@ block content
         .cta
             .cta__img.cta__img--logo
                 img(src='/img/logo-white.png', alt='Natours logo')
-            img.cta__img.cta__img--1(src=`/img/tours/${tour.images[1]}`, alt='')
-            img.cta__img.cta__img--2(src=`/img/tours/${tour.images[2]}`, alt='')
+            img.cta__img.cta__img--1(src=`/img/dogs/${dog.images[1]}`, alt='')
+            img.cta__img.cta__img--2(src=`/img/dogs/${dog.images[2]}`, alt='')
             .cta__content
                 if user
-                    button.btn.btn--green.span-all-rows#delete-dog(data-tour-id=`${tour.id}`) Delete
+                    button.btn.btn--green.span-all-rows#delete-dog(data-dog-id=`${dog.id}`) Delete
                 else
                     a.btn.btn--green.span-all-rows(herf='/login') User Login
 
               
-            //- a.btn.btn--green.btn--small(href=`/tour/${tour.slug}`) Details
+            //- a.btn.btn--green.btn--small(href=`/dog/${dog.slug}`) Details
