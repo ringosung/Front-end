@@ -22,14 +22,13 @@ block content
             ul.side-nav
               +navItem('/newDog', 'Add new dog', 'users')
               +navItem('/deleteDog', 'delete dog', 'map')
+              
 
 
       .user-view__content
         .user-view__form-container
           h2.heading-secondary.ma-bt-md Your account settings
           
-          //- WITHOUT API
-          //- form.form.form-user-data(action='/submit-user-data' method='POST' enctype='multipart/form-data')
           
           //- WITH API
           form.form.form-user-data

@@ -83,8 +83,8 @@ block content
             img.cta__img.cta__img--1(src=`/img/dogs/${dog.images[1]}`, alt='')
             img.cta__img.cta__img--2(src=`/img/dogs/${dog.images[2]}`, alt='')
             .cta__content
-                h2.heading-secondary Make a booking and our charity worker will contact you.
-                p.cta__text= 'note: HKD$100 deposit will be charged to avoid the abuse of adoption.'
+                h2.heading-secondary.ma-bt-lg= `Make a booking now, ${dog.name} is waiting for you!`
+                p.cta__text= 'note: adoption fee is $400 and includes her spay, microchip and shots.'
                 if user
                     button.btn.btn--green.span-all-rows#book-dog(data-dog-id=`${dog.id}`) Bring me home!
                 else

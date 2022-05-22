@@ -112,7 +112,7 @@ guides: [
     {
       type: mongoose.Schema.ObjectId,
       ref: 'User',
-      default: '5c8a1ec62f8fb814b56fa183'
+      default: ['5c8a1dfa2f8fb814b56fa181']
     }
   ]
 

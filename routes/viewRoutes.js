@@ -17,5 +17,6 @@ router.get('/deleteDogDetail/:slug', authController.isLoggedIn, viewsController.
 router.get('/newDog', authController.isLoggedIn, viewsController.newDog);
 router.get('/my-dogs', authController.protect, viewsController.getMyDogs)
 
+
 module.exports = router;
 

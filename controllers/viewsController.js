@@ -116,3 +116,8 @@ res.status(200).render('deleteDogDetail', {
 })
 })
 
+exports.updateDog = (req, res) => {
+  res.status(200).render('updateDog', {
+    title: `Create New Account`,
+  });
+};
