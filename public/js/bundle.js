@@ -6680,7 +6680,7 @@ var displayMap = function displayMap(locations) {
     // style URL
     zoom: 10,
     // starting zoom
-    maxZoom: 18,
+    maxZoom: 16,
     scrollZoom: true,
     center: [114.18944925945331, 22.329196444960935]
   });
@@ -11465,7 +11465,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var newDog = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(name, breeds, price, summary, descriptionDog, difficulty, coordinates, address, description) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(name, breeds, age, summary, descriptionDog, difficulty, coordinates, address, description) {
     var res;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -11479,7 +11479,7 @@ var newDog = /*#__PURE__*/function () {
               data: {
                 name: name,
                 breeds: breeds,
-                price: price,
+                age: age,
                 summary: summary,
                 descriptionDog: descriptionDog,
                 difficulty: difficulty,
@@ -11965,7 +11965,7 @@ if (newDogForm) {
     e.preventDefault();
     var name = document.getElementById('name').value;
     var breeds = document.getElementById('breeds').value;
-    var price = document.getElementById('price').value;
+    var age = document.getElementById('age').value;
     var summary = document.getElementById('summary').value;
     var descriptionDog = document.getElementById('descriptionDog').value;
     var difficulty = document.getElementById('difficulty').value;
@@ -11981,6 +11981,24 @@ if (newDogForm) {
           address: _address,
           description: description
         };
+      } else if (address == 'Aberdeen') {
+        var _coordinates2 = [114.13915656216734, 22.249879374389014];
+        var _address2 = 'G/F, Noble Square, 3 Wah Kwai Road, Aberdeen, HK';
+        var _description = 'Shelter at Aberdeen';
+        return {
+          coordinates: _coordinates2,
+          address: _address2,
+          description: _description
+        };
+      } else if (address == 'Mong Kok') {
+        var _coordinates3 = [114.16127125277983, 22.32888755586325];
+        var _address3 = 'G/F, 384 Tai Nan Street, Sham Shui Po, KLN';
+        var _description2 = 'Shelter at Mong Kok';
+        return {
+          coordinates: _coordinates3,
+          address: _address3,
+          description: _description2
+        };
       }
     }
 
@@ -11988,7 +12006,7 @@ if (newDogForm) {
     var coordinates = coordinatesObj.coordinates;
     var locationAddress = coordinatesObj.address;
     var locationDescription = coordinatesObj.description;
-    (0, _newDog.newDog)(name, breeds, price, summary, descriptionDog, difficulty, coordinates, locationAddress, locationDescription);
+    (0, _newDog.newDog)(name, breeds, age, summary, descriptionDog, difficulty, coordinates, locationAddress, locationDescription);
   });
 }
 

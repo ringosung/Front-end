@@ -95,7 +95,7 @@ if (newDogForm) {
           e.preventDefault();
           const name = document.getElementById('name').value;
           const breeds = document.getElementById('breeds').value;
-          const price = document.getElementById('price').value;
+          const age = document.getElementById('age').value;
           const summary = document.getElementById('summary').value;
           const descriptionDog = document.getElementById('descriptionDog').value;
           const difficulty = document.getElementById('difficulty').value;
@@ -106,14 +106,26 @@ if (newDogForm) {
             const address = 'Shop 18, G/F, Shui King Building, 144 Wo Yi Hop Road, Kwai Chung, N.T.'
             const description = 'Shelter at Kwai Chung'
             return {coordinates, address, description}
-            }
+            } 
+            else if (address == 'Aberdeen') {
+              const coordinates = [114.13915656216734, 22.249879374389014]
+              const address = 'G/F, Noble Square, 3 Wah Kwai Road, Aberdeen, HK'
+              const description = 'Shelter at Aberdeen'
+              return {coordinates, address, description}
+              } 
+              else if (address == 'Mong Kok') {
+                const coordinates = [114.16127125277983, 22.32888755586325]
+                const address = 'G/F, 384 Tai Nan Street, Sham Shui Po, KLN'
+                const description = 'Shelter at Mong Kok'
+                return {coordinates, address, description}
+                }  
           }
           const coordinatesObj = addressConvert(address);
           const coordinates = coordinatesObj.coordinates;
           const locationAddress = coordinatesObj.address;
           const locationDescription = coordinatesObj.description;
           
-          newDog(name, breeds, price, summary, descriptionDog, difficulty, coordinates, locationAddress, locationDescription);
+          newDog(name, breeds, age, summary, descriptionDog, difficulty, coordinates, locationAddress, locationDescription);
         });
       }
 

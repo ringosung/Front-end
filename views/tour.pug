@@ -29,12 +29,9 @@ block content
             .heading-box__group
                 .heading-box__detail
                     svg.heading-box__icon
-                        use(xlink:href='/img/icons.svg#icon-clock')
+                        use(xlink:href='/img/icons.svg#icon-search')
                     span.heading-box__text= `${tour.breeds} breeds`
                 .heading-box__detail
-                    //- svg.heading-box__icon
-                    //-     use(xlink:href='/img/icons.svg#icon-map-pin')
-                    //- span.heading-box__text= tour.startLocation.description
 
     section.section-description
         .overview-box
@@ -45,6 +42,7 @@ block content
                     //- - const date = tour.startDates[0].toLocaleString('en-us', {month: 'long', year: 'numeric'})
                     //- +overviewBox('Birth', date, 'calendar')
                     +overviewBox('Dog Size', tour.difficulty, 'trending-up')
+                    +overviewBox('Age', `${tour.age}`, 'clock')
                     +overviewBox('Like', `${tour.maxGroupSize} people`, 'user')
 
                 .overview-box__group

@@ -49,9 +49,14 @@ const tourSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    price: {
+    age: {
         type: Number,
         required: [true, 'A dog must have a age']
+    },
+    price: {
+      type: Number,
+      default: 100,
+      required: [true, 'handling fee']
     },
     priceDiscount: {
         type: Number,
@@ -88,17 +93,6 @@ const tourSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    // startLocation: {
-    //     // GeoJSON
-    //     type: {
-    //       type: String,
-    //       default: 'Point',
-    //       enum: ['Point']
-    //     },
-    //     coordinates: [Number],
-    //     address: String,
-    //     description: String
-    //   },
       locations: [
         {
           type: {

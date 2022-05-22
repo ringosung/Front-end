@@ -6,7 +6,7 @@ export const displayMap = locations => {
     container: 'map', // container ID
     style: 'mapbox://styles/ringosung/cl2uwyhwj00p014ks76zxx290', // style URL
     zoom: 10, // starting zoom
-    maxZoom: 18,
+    maxZoom: 16,
     scrollZoom: true,
     center: [114.18944925945331, 22.329196444960935]
 });
